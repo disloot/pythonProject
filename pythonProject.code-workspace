@@ -1,0 +1,16 @@
+{
+<<<<<<< HEAD
+    "folders": [
+        {
+            "path": "."
+        }
+    ]
+=======
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+>>>>>>> 24bb7ca (day20)
+}
