@@ -1,5 +1,4 @@
-# author luke
-# 2022年02月24日
+
 
 def demo1():
     num=int(input("输入整数："))

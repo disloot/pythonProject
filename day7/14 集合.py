@@ -1,6 +1,4 @@
-#!/usr/bin/python
-# author luke
-# 2022年02月21日
+
 
 dict1= {}
 

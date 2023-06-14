@@ -1,6 +1,3 @@
-# author luke
-# 2022年02月28日11时43分17秒
-
 
 def bsearch(arr,target):
     low=0

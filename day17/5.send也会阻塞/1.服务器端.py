@@ -1,7 +1,4 @@
-# 作者: 王道 龙哥
-# 2022年03月04日16时08分35秒
-# 作者: 王道 龙哥
-# 2022年03月04日16时08分42秒
+
 from socket import *
 import select
 import sys

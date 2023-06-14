@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# author luke
-# 2022年02月21日
 
 num_str = "0123456789"
 

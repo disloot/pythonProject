@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# author luke
-# 2022年02月22日
 
 def sum(n):
     # 结束条件写在return之前

@@ -1,5 +1,4 @@
-# author luke
-# 2022年02月23日
+
 
 def print_diamond1():
     # abs求绝对值

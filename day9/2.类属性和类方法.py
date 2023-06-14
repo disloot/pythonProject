@@ -1,5 +1,3 @@
-# author luke
-# 2022年02月23日
 
 class Tool:
     count=0

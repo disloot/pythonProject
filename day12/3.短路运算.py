@@ -1,5 +1,4 @@
-# author luke
-# 2022年02月26日11时06分13秒
+
 
 
 # 1 == 0 and print('hello')

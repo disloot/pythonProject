@@ -1,5 +1,4 @@
-# author luke
-# 2022年02月24日
+
 
 try:
     num=int(input('请输入一个整数：'))

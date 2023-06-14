@@ -1,6 +1,4 @@
-#!/usr/bin/python
-# author luke
-# 2022年02月22日
+
 
 def change(num_list):
     num_list += [1, 2, 3]  #只有+=与extend等价

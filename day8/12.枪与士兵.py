@@ -1,6 +1,4 @@
-#!/usr/bin/python
-# author luke
-# 2022年02月22日
+
 class Gun:
 
     def __init__(self, model):

@@ -1,6 +1,4 @@
-# 作者: 王道 龙哥
-# 2022年03月03日10时10分00秒
-# 真正的即时聊天
+
 import socket
 import select
 import sys

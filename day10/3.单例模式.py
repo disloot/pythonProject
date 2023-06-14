@@ -1,5 +1,3 @@
-# author luke
-# 2022年02月24日
 
 # 借助类属性，外加重写__new__方法
 class MusicPlayer(object):

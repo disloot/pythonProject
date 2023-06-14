@@ -1,5 +1,4 @@
-# author luke
-# 2022年02月24日
+
 try:
     print(a)
 except Exception as e:

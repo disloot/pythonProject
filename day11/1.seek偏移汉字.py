@@ -1,5 +1,3 @@
-# author luke
-# 2022年02月25日
 
 def use_seek():
     file = open('file', mode='r+', encoding='utf8')

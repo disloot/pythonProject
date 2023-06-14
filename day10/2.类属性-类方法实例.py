@@ -1,5 +1,4 @@
-# author luke
-# 2022年02月24日
+
 class Game(object):
 
     # 历史最高分

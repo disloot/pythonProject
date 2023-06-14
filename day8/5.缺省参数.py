@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# author luke
-# 2022年02月22日
 
 # 缺省参数指传参时可以不传对应参数
 def print_info(name, gender=True):

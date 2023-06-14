@@ -1,5 +1,4 @@
-# 作者: 王道 龙哥
-# 2022年03月04日16时38分09秒
+
 import struct
 import os
 import time

@@ -1,5 +1,3 @@
- # author luke
-# 2022年02月28日11时16分54秒
 
 class BitMap:
     def __init__(self):

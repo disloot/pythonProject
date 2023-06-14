@@ -1,5 +1,4 @@
-# author luke
-# 2022年02月28日15时17分07秒
+
 from operator import itemgetter, attrgetter
 def sort_str():
     l = "This is a test string from Andrew".split()

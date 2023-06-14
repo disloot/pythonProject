@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# author luke
-# 2022年02月22日
 
 def demo1(*args, **kwargs):
     print(args)

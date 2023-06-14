@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# author luke
-# 2022年02月21日
 
 
 xiaoming = {"name": "小明",

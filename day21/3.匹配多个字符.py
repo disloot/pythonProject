@@ -1,5 +1,4 @@
-# 作者: 王道 龙哥
-# 2022年03月09日11时09分02秒
+
 import re
 
 def use_star():
@@ -19,9 +18,9 @@ def use_plus():
     for name in names:
         ret = re.match("[a-zA-Z_]+[a-zA-Z_0-9]*", name)
         if ret:
-            print("变量名 %s 符合要求" % ret.group())
+            print(f"变量名 {ret.group()} 符合要求")
         else:
-            print("变量名 %s 非法" % name)
+            print(f"变量名 {name} 非法")
 
 
 # 使用问号

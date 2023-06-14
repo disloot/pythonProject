@@ -1,6 +1,4 @@
-  #!/usr/bin/python
-# author luke
-# 2022年02月22日
+
 
 # return返回多个值时，加与不加括号都是一个元组
 def measure():

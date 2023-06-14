@@ -1,5 +1,3 @@
-# author luke
-# 2022年02月25日
 
 class Stack:
     def __init__(self):
