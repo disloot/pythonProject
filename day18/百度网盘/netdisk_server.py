@@ -1,5 +1,4 @@
-# 作者: 王道 龙哥
-# 2022年03月05日09时46分14秒
+
 from socket import *
 import struct
 import os
