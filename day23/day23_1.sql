@@ -126,3 +126,6 @@ select *,rank() over (order by age desc) as rank1,
 									
 									
 select * from students where gender=1 order by age desc limit 1,3;
+
+select gender,count(*) from students group BY gender with rollup HAVING count(*)>3  ;
+
