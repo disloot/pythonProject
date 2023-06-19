@@ -18,6 +18,19 @@
 				"database": "pythonProject",
 				"username": "root",
 				"password": "123"
+			},
+			{
+				"mysqlOptions": {
+					"authProtocol": "default"
+				},
+				"previewLimit": 50,
+				"server": "192.168.10.129",
+				"port": 3306,
+				"driver": "MySQL",
+				"name": "NetDisk",
+				"database": "NetDisk",
+				"username": "root",
+				"password": "123"
 			}
 		]
 	}
