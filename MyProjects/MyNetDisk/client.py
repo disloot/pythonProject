@@ -1,7 +1,19 @@
+#!/usr/bin/python
+#author: Lyle
+#time：2023/06/19 22:15
+
 from socket import *
 import struct
 import re
 import hashlib
+
+VERSION = 'beta'
+
+
+def get_crypto(password):
+    f_md5 = hashlib.md5()
+    f_md5.update(password.encode())
+    return f_md5.hexdigest()
 
 
 class Client:
@@ -10,6 +22,7 @@ class Client:
         self.socket: socket = None
         self.ip = ip
         self.port = port
+        self.work_path = '/home'
 
     def tcp_connect(self):
         self.socket = socket(AF_INET, SOCK_STREAM)
@@ -34,6 +47,23 @@ class Client:
         train_head = struct.unpack('I', train_head_bytes)
         return self.socket.recv(train_head[0]).decode()
 
+    def beginning(self):
+        print('-' * 50)
+        print(f'NetDisk  version:{VERSION}')
+        print('\n')
+        while True:
+            choose = input('选择要进行的操作(l.log in   or   s.sign up):')
+            if choose == 'l':
+                self.send_train('log')
+                self.do_log_in()
+                break
+            elif choose == 's':
+                self.send_train('sign')
+                self.do_sign_up()
+                break
+            else:
+                print('无效的命令，请输入 “l” or "s" ')
+
     def send_command(self):
         """
         发送各种命令给服务器
@@ -41,7 +71,7 @@ class Client:
         """
         while True:
             # 读取命令并发送到服务器端
-            command = input('NetDisk-> ')
+            command = input(f'NetDisk:{self.work_path}> ')
             self.send_train(command)
             command_dict = {
                 'ls': self.do_ls,
@@ -53,30 +83,13 @@ class Client:
                 'sign': self.do_sign_up,
                 'log': self.do_log_in
             }
-            # if command[:2] == 'ls':
-            #     self.do_ls()
-            # elif command[:2] == 'cd':
-            #     self.do_cd()
-            # elif command[:3] == 'pwd':
-            #     self.do_pwd()
-            # elif command[:2] == 'rm':
-            #     self.do_rm(command)
-            # elif command[:4] == 'gets':
-            #     self.do_get(command)
-            # elif command[:4] == 'puts':
-            #     self.do_put(command)
-            # elif command == 'sign':
-            #     self.do_sign_up()
-            # elif command == 'b':
-            #     print(self.recv_train())
-            # else:
-            #     print('wrong command')
-            command_title = re.match(r'[\S]+',command).group()
+            command_title = re.match(r'[\S]+', command).group()
             print(command_title)
             try:
                 command_dict[command_title]()
             except KeyError:
                 print('wrong command')
+
     def do_ls(self):
         print('ls')
 
@@ -95,7 +108,7 @@ class Client:
     def do_put(self, command):
         pass
 
-    def do_sign_up(self):
+    def do_sign_up(self): # 待加入返回上一级功能
         while True:
             while True:
                 user_name = input('输入用户名（数字或字母或下划线长度不超过8位）：')
@@ -111,21 +124,37 @@ class Client:
                         break
                     else:
                         print('两次密码不一致')
-                f_md5 = hashlib.md5()
-                f_md5.update(pass_word.encode())
-                crypto_pswd = f_md5.hexdigest()
+                crypto_pswd = get_crypto(pass_word)
                 self.send_train(crypto_pswd)
                 print('注册成功')
                 break
             elif is_sign == '1110':
                 print('该用户名已被注册,请重新输入')
                 continue
+            self.send_command()
 
-    def do_log_in():
-        pass
+    def do_log_in(self):
+        while True:
+            user_name = input('请输入用户名：')
+            password = input('请输入密码：')
+            self.send_train(user_name)
+            self.send_train(get_crypto(password))
+            is_correct = self.recv_train()
+            if is_correct == '1110':
+                print('--登陆成功--')
+                break
+            elif is_correct == '0001':
+                print('--密码错误，请重新输入--')
+            elif is_correct == '0101':
+                print('--用户不存在--')
+        self.send_command()
+
+
+def main():
+    client = Client('192.168.10.129', 2000)
+    client.tcp_connect()
+    client.beginning()
 
 
 if __name__ == '__main__':
-    client = Client('192.168.10.129', 2000)
-    client.tcp_connect()
-    client.send_command()
+    main()

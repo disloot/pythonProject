@@ -20,7 +20,7 @@ class User():
         self.username = None
         self._path = os.getcwd()
         self.is_login = False
-        self.server = server
+        self.server:Server = server
 
     def send_train(self, send_body):
         """
@@ -37,9 +37,17 @@ class User():
         recv火车，就是把火车recv的内容返回出去
         :return:
         """
+
         train_head_bytes = self.socket.recv(4)
         train_head = struct.unpack('I', train_head_bytes)
         return self.socket.recv(train_head[0]).decode()
+
+
+    def get_cursor(self):
+        return self.server.get_cursor()
+
+    def database_commit(self):
+        return self.server.database.commit()
 
     def deal_task(self, command):  # sourcery skip: raise-specific-error
 
@@ -56,8 +64,8 @@ class User():
         command_title = re.match(r'[\S]+', command).group()
         print(command_title)
         command_dict[command_title]()
-    
-    def do_ls(selft):
+
+    def do_ls(self):
         pass
 
     def do_cd(self):
@@ -76,14 +84,8 @@ class User():
         pass
 
     def do_sign_up(self, epoll: select.epoll):  # sourcery skip: extract-method
-        while True:
-            database = pymysql.connect(host='192.168.10.129',
-                                       user='root',
-                                       password='123',
-                                       database='NetDisk',
-                                       port=3306,
-                                       charset='utf8')
-            curs = database.cursor()
+        while True:           
+            curs = self.get_cursor()
             user_name = self.recv_train()
             print('成功接收用户名')
             if not curs.execute(
@@ -95,17 +97,30 @@ class User():
                     f"INSERT INTO users(name,password) VALUES('{user_name}','{pass_word}');"
                 )
                 os.mkdir(self._path)
-                database.commit()
+                self.database_commit()
                 curs.close()
-                database.close()
                 print('注册成功')
                 break
             else:
                 self.send_train('1110')
         epoll.register(self.socket.fileno(), select.EPOLLIN)
 
-    def do_log_in():
-        pass
+    def do_log_in(self, epoll: select.epoll):
+        while True:
+            user_name = self.recv_train()
+            password = self.recv_train()
+            curs = self.get_cursor()
+            if curs.execute(f"SELECT password FROM users WHERE name = '{user_name}';"):
+                if  curs.fetchone()[0] == password:
+                    self.send_train('1110')
+                    print('登陆成功')
+                    break
+                else:
+                    self.send_train('0001')
+                    print('密码错误')
+            else:
+                self.send_train('0101')   
+        epoll.register(self.socket.fileno(), select.EPOLLIN)
 
 class Server:
 
@@ -119,17 +134,21 @@ class Server:
 
     def creat_client(self):
         return User(self.socket.accept(), self)
+    def connect_database(self):
+        self.database = pymysql.connect(host='192.168.10.129',
+                                       user='root',
+                                       password='123',
+                                       database='NetDisk',
+                                       port=3306,
+                                       charset='utf8')
+    def get_cursor(self):
+        return self.database.cursor()
 
-    # def deal_task(self, user: User, command):
-    #     try:
-    #         user.deal_task(command)
-    #     except Exception as ex:
-    #         print(ex)
 
 
 def main():
     s = Server('', 2000)
-
+    s.connect_database()
     pool = Pool(3)
     user_list = {}
     epoll = select.epoll(-1)
@@ -153,11 +172,15 @@ def main():
                                                    args=(epoll, ),
                                                    daemon=True)
                     sign_thread.start()
+                elif command[:3] == 'log':
+                    epoll.unregister(fd)
+                    sign_thread = threading.Thread(target=user.do_log_in,
+                                                   args=(epoll, ),
+                                                   daemon=True)
+                    sign_thread.start()
                 else:
-                    # try:
                     user.deal_task(command)
-                # except Exception as ex:
-                #     print(ex)
+
 
 
 if __name__ == '__main__':
