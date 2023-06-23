@@ -1,0 +1,2 @@
+2021-07-01 16:46:30,076 - mini_frame.py[line:245] - INFO: 访问的是，/index.html
+2021-07-01 16:46:44,957 - mini_frame.py[line:245] - INFO: 访问的是，/center.html
