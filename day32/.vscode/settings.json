@@ -1,0 +1,31 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "laptop_ubuntu",
+            "username": "root",
+            "password": "123",
+            "database": "mysql"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "192.168.198.129",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "dist_ubuntu",
+            "database": "NetDisk",
+            "username": "root",
+            "password": "123"
+        }
+    ]
+}
