@@ -12,7 +12,7 @@ class Test:
 
 @Test
 def foo(name):
-    print('I am foo {}'.format(name))
+    print(f'I am foo {name}')
 
 
-foo()
+foo(123)

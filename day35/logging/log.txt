@@ -1,0 +1,3 @@
+2023-06-24 12:13:40,421 - /home/ly/pythonProject/day35/1 logging.basciConfig.py : [line:14] - INFO:info
+2023-06-24 12:13:40,421 - /home/ly/pythonProject/day35/1 logging.basciConfig.py : [line:15] - DEBUG:debug
+2023-06-24 12:13:40,421 - /home/ly/pythonProject/day35/1 logging.basciConfig.py : [line:16] - WARNING:warning

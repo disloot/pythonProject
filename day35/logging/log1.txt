@@ -1,0 +1,4 @@
+2023-06-24 21:41:17,481 - /home/ly/pythonProject/day35/2 logger.py : [line:20] - WARNING:
+2023-06-24 21:41:17,481 - /home/ly/pythonProject/day35/2 logger.py : [line:21] - ERROR:
+2023-06-24 21:41:17,481 - /home/ly/pythonProject/day35/2 logger.py : [line:22] - CRITICAL:
+p

@@ -15,7 +15,8 @@ def example():
 
 print(example.__name__, example.__doc__)#wper decorator
 
-from functools import wraps
+from functools import wraps 
+
 
 
 def my_new_decorator(func):
